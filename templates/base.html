@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><head>
+    {% block head %}
+    <meta name="viewport" content="width=device-width">
+
+    <!-- google font -->
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic' rel='stylesheet' type='text/css'>
+    <!-- font awesome! -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
+
+    <!--Scripts -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <title>{% block title %}{% endblock %} - BillSplit</title>
+    {% endblock %}
+</head>
+<body>
+    <div class="site">
+
+        {% block content %}{% endblock %}
+
+        <div class="footer">
+            {% block footer %}
+            <div class="contact blurb">
+                <p>Made by Yujin Ariza</p>
+            </div>
+            <div class="contact links">
+                <p>
+                    <i class="fa fa-github-alt"></i>
+                    <a href="https://github.com/yariza">github.com/yariza</a><br>
+                    <i class="fa fa-linkedin"></i>
+                    <a href="https://linkedin.com/in/yujinariza">linkedin.com/in/yujinariza</a><br>
+                    <i class="fa fa-envelope-o"></i>
+                    <a href="mailto:me@yujinariza.com">me@yujinariza.com</a><br>
+                </p>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

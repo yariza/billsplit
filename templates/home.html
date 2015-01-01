@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/home.js') }}" ></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+{% block content %}
+
+<article>
+    <div id="room-panel">
+        <p>
+        <a class="btn btn-lg btn-primary" href="/room" role="button">Create a room</a>
+        </p>
+        <p>or</p>
+        <p>
+            <input type="text" name="name" id="name" value="" placeholder="Room ID" tabindex="1" />
+            <a class="btn btn-md btn-primary" href="/room" role="button">Join an existing room</a>
+        </p>
+    </div>
+</article>
+
+{% endblock %}

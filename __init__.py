@@ -18,11 +18,25 @@ def get_redis():
 
 from user.decorators import user_id_required
 
+"""
+Views
+"""
+
 """ Home """
 @app.route("/")
 @user_id_required
-def index():
-    return render_template('index.html')
+def home():
+    return render_template('home.html')
+
+""" Room """
+@app.route("/room/<room_id>")
+@user_id_required
+def room(room_id):
+    return render_template('room.html')
+
+"""
+API
+"""
 
 """ Wallet """
 from wallet.views import api_view as wallet_view

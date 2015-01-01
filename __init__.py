@@ -7,8 +7,6 @@ app.debug = True
 app.use_debugger = True
 
 import db.db as db
-from gevent import monkey
-monkey.patch_all()
 
 @app.before_request
 def get_redis():
@@ -87,14 +85,5 @@ app.add_url_rule('/api/room/<room_id>/order/',
 def page_not_found(e):
     return render_template('404.html'), 404
 
-from gevent.wsgi import WSGIServer
-from werkzeug.serving import run_with_reloader
-from werkzeug.debug import DebuggedApplication
-
-@run_with_reloader
-def runServer():
-    http_server = WSGIServer(('', 5000), DebuggedApplication(app))
-    http_server.serve_forever()
-
 if __name__ == "__main__":
-    runServer()
+    app.run()

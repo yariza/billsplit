@@ -1,4 +1,4 @@
-var app = angular.module('billsplit', ['ngAnimate']).config(function($interpolateProvider){
+var app = angular.module('billsplit', ['ngClickSelect']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('[[').endSymbol(']]');
 });
 

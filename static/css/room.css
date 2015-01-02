@@ -56,6 +56,10 @@
     padding: 10px 10px;
 }
 
+#order-list #order-price-input {
+    width: 60px;
+}
+
 #order-name-label {
     font-size: 18px;
 }

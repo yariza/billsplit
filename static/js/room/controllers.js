@@ -37,6 +37,12 @@
                 this.current = orderCtrl;
             }
         };
+        this.hideOrders = function() {
+            if (this.current !== null) {
+                this.current.hideOrder();
+                this.current = null;
+            }
+        }
     }]);
 
     app.controller('OrderController', [function(){

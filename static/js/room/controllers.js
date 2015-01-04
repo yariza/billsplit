@@ -1,6 +1,6 @@
 (function() {
 
-    app.controller('RoomController', [function(){
+    app.controller('RoomController', ['$scope', function($scope){
         this.data = data;
         this.showUserMenu = false;
 
@@ -21,48 +21,48 @@
         };
     }]);
 
-    app.controller('OrderListController', [function(){
+    app.controller('OrderListController', ['$scope', '$timeout', function($scope, $timeout){
 
-        this.current = null;
-        this.toggleOrder = function(orderCtrl) {
-            if (this.current === orderCtrl) {
-                orderCtrl.hideOrder();
-                this.current = null;
-            }
-            else {
-                if (this.current !== null) {
-                    this.current.hideOrder();
+        this.orders = $scope.$parent.roomCtrl.data['orders'];
+        this.currentID = null;
+        this.toggleOrder = function(order) {
+            var orderList = this;
+            $timeout(function() {
+                if (orderList.currentID === order['id']) {
+                    orderList.currentID = null;
                 }
-                orderCtrl.showOrder();
-                this.current = orderCtrl;
-            }
+                else {
+                    orderList.currentID = order['id'];
+                }
+            });
         };
         this.hideOrders = function() {
-            if (this.current !== null) {
-                this.current.hideOrder();
-                this.current = null;
-            }
+            this.currentID = null;
+        }
+        this.addOrder = function() {
+            var newOrder = {
+                id: "new_order",
+                name: "New Order",
+                price: 0,
+                members: []
+            };
+            this.orders.push(newOrder);
+            this.toggleOrder(newOrder);
         }
     }]);
 
-    app.controller('OrderController', [function(){
-        this.data = null;
-        this.editing = false;
+    app.controller('OrderController', ['$scope', function($scope){
         this.selectPrice = false;
 
-        this.hideOrder = function() {
-            this.editing = false;
-        };
-
-        this.showOrder = function() {
-            this.editing = true;
-        };
+        this.editing = function() {
+            return $scope.$parent.orderListCtrl.currentID === $scope.$parent.order['id'];
+        }
     }]);
 
     app.controller('OrderPriceController', [function(){
         this.input = 0.00;
         this.updatePrice = function(orderCtrl) {
-            orderCtrl.data.price = Math.floor(input * 100);
+            orderCtrl.data.price = Math.floor(this.input * 100);
         };
     }]);
 

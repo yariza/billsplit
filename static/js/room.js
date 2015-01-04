@@ -1,3 +1,9 @@
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
+
 var app = angular.module('billsplit', ['ngClickSelect']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('[[').endSymbol(']]');
 });
@@ -24,18 +30,20 @@ var data = {
             color: "pink"
         }
     },
-    orders: {
-        "orderid1": {
+    orders: [
+        {
+            id: "orderid1",
             name: "Chicken Vindaloo",
             price: 1275,
             members: ["asdf2", "asdf3"]
         },
-        "orderid2": {
+        {
+            id: "orderid2",
             name: "See Two",
             price: 1499,
             members: ["asdf1"]
         }
-    }
+    ]
 }
 
 $('#order-list').css('height', $(window).height());

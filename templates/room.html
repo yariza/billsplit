@@ -37,50 +37,49 @@
      stop-event="click"
      class="list-group" id="order-list">
     <a ng-controller="OrderController as orderCtrl"
-       ng-repeat="(orderid, order) in roomCtrl.data.orders"
-       ng-click="orderListCtrl.toggleOrder(orderCtrl)"
+       ng-repeat="order in roomCtrl.data.orders"
+       ng-click="orderListCtrl.toggleOrder(order)"
        stop-event="click"
        ng-init="orderCtrl.data = order"
        class="list-group-item" id="order-item" href="#">
-        <span ng-hide="orderCtrl.editing"
+        <span ng-hide="orderCtrl.editing()"
               ng-click="orderCtrl.selectPrice = true"
               class="pull-right"
               id="order-price-label">
             [[ order.price / 100 | currency ]]
         </span>
         <div class="input-group pull-right" style="width:25px"
-             ng-show="orderCtrl.editing">
+             ng-show="orderCtrl.editing()">
             <span class="input-group-addon">$</span>
             <input ng-controller="OrderPriceController as orderPriceCtrl"
                    ng-init="orderPriceCtrl.input = order.price / 100"
                    ng-model="orderPriceCtrl.input"
-                   ng-change="orderPriceCtrl.updatePrice()"
-                   select-me="orderListCtrl.current === orderCtrl && orderCtrl.selectPrice"
+                   ng-change="orderPriceCtrl.updatePrice(orderCtrl)"
+                   select-me="orderCtrl.editing() && orderCtrl.selectPrice"
                    stop-event="click"
-                   ng-click-select
                    type="number"
                    min="0" step="0.01"
                    name="order-price" id="order-price-input" placeholder="0.00">
             </input>
         </div>
-        <span ng-hide="orderCtrl.editing"
+        <span ng-hide="orderCtrl.editing()"
               ng-click="orderCtrl.selectPrice = false"
               id="order-name-label">
             [[ order.name ]]
         </span>
-        <input ng-show="orderCtrl.editing"
-               select-me="orderListCtrl.current === orderCtrl && !orderCtrl.selectPrice"
+        <input ng-show="orderCtrl.editing()"
+               select-me="orderCtrl.editing() && !orderCtrl.selectPrice"
                ng-value="order.name"
                ng-model="order.name"
                ng-click-select
                stop-event="click"
                type="text" name="order-name" id="order-name-input" placeholder="Order Name" >
         </input>
-        <div ng-hide="orderCtrl.editing"
+        <div ng-hide="orderCtrl.editing()"
              id="order-members-label">
             [[ roomCtrl.getMemberNames(order.members).join(', ') ]]
         </div>
-        <div ng-show="orderCtrl.editing"
+        <div ng-show="orderCtrl.editing()"
              id="order-members-input">
             <span ng-repeat="(memberID, member) in roomCtrl.data.members"
                   ng-controller="OrderMemberController as orderMemberCtrl"
@@ -95,11 +94,15 @@
             </span>
         </div>
     </a>
-    <a id="add-order-item" class="list-group-item" href="#"><i class="fa fa-plus-circle fa-fw"></i><span>Add an order...</span></a>
+    <a ng-click="orderListCtrl.addOrder()"
+       id="add-order-item" class="list-group-item" href="#">
+      <i class="fa fa-plus-circle fa-fw"></i><span>Add an order...</span>
+    </a>
 </div>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
 <script type="text/javascript" src="https://code.angularjs.org/1.2.28/angular-animate.js"></script>
+<script src="{{ url_for('static', filename='js/fastclick.js') }}" ></script>
 <script src="{{ url_for('static', filename='js/room/directives/ng-click-select.js') }}"></script>
 <script src="{{ url_for('static', filename='js/room.js') }}" ></script>
 <script src="{{ url_for('static', filename='js/room/controllers.js') }}"></script>

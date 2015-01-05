@@ -1,5 +1,6 @@
 .site {
     padding-top: 50px;
+    padding-bottom: 50px;
     margin-top: auto;
     margin-left: 0px;
     margin-right: 0px;
@@ -46,6 +47,11 @@
     height: 18px;
     border-radius: 4px;
     display: inline-block;
+}
+
+.nav-justified>li {
+    display: table-cell;
+    width: 1%;
 }
 
 #order-list .list-group-item {

@@ -1,0 +1,8 @@
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <ul class="nav nav-pills nav-justified">
+    <li ng-repeat="pane in panes" ng-class="{active: pane.selected}">
+      <a href="" ng-click="select(pane)">[[pane.bsTitle]]</a>
+    </li>
+  </ul>
+</nav>
+<div class="tab-content" ng-transclude></div>

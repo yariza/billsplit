@@ -4,7 +4,7 @@ if ('addEventListener' in document) {
     }, false);
 }
 
-var app = angular.module('billsplit', ['ngClickSelect']).config(function($interpolateProvider){
+var app = angular.module('billsplit', ['ngClickSelect', 'directives.tabs']).config(function($interpolateProvider){
     $interpolateProvider.startSymbol('[[').endSymbol(']]');
 });
 
@@ -45,6 +45,4 @@ var data = {
         }
     ]
 }
-
-$('#order-list').css('height', $(window).height());
 

@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <a ng-click="toggleUserMenu()" class="navbar-brand" href="javascript:void(0)">
+    <span ng-hide="showUserMenu" id="room-name-label">[[ data.name ]]</span>
+    <input ng-model="data.name"
+           ng-value="data.name"
+           ng-show="showUserMenu"
+           select-me="showUserMenu"
+           stop-event="click"
+           ng-click-select
+           type="text" name="room-name" id="room-name-input" placeholder="Room Name" >
+    </input>
+    <i ng-hide="showUserMenu" class="fa fa-caret-down fa-fw"></i>
+    <i ng-show="showUserMenu" class="fa fa-caret-up fa-fw"></i>
+  </a>
+  <div ng-show="showUserMenu" class="list-group" id="member-list">
+    <div ng-repeat="member in data.members" class="list-group-item">
+      <div ng-style="{ 'background-color': member.color }" class="user-color"></div>
+      <span>[[ member.name ]]</span>
+    </div>
+    <a class="list-group-item" href="javascript:void(0)"><i class="fa fa-plus-circle fa-fw"></i><span>Invite a member...</span></a>
+  </div>
+</nav>

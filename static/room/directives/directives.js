@@ -3,7 +3,13 @@
 *
 * Directives
 */
-angular.module('directives' , ['directives.tabs', 'directives.wallet', 'directives.panel'])
+angular.module('directives' , ['directives.tabs',
+                               'directives.wallet',
+                               'directives.panel',
+                               'directives.room',
+                               'directives.menu',
+                               'directives.order',
+                               'directives.input'])
 
 .directive('focusMe', function($timeout, $parse) {
     return {

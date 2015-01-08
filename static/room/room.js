@@ -30,20 +30,23 @@ var data = {
             color: "pink"
         }
     },
-    orders: [
-        {
-            id: "orderid1",
+    orders: {
+        '_orderid1': {
             name: "Chicken Vindaloo",
-            price: 1275,
-            members: ["asdf2", "asdf3"]
+            price: 12.75,
+            members: {
+                "asdf2": true,
+                "asdf3": true
+            }
         },
-        {
-            id: "orderid2",
+        '_orderid2': {
             name: "See Two",
-            price: 1499,
-            members: ["asdf1"]
+            price: 14.99,
+            members: {
+                "asdf1": true
+            }
         }
-    ],
+    },
     wallet: {
         "card_enabled": true,
         "venmo_enabled": false,
@@ -63,3 +66,9 @@ var data = {
 Number.prototype.clamp = function(min, max) {
   return Math.min(Math.max(this, min), max);
 };
+
+if (typeof String.prototype.startsWith != 'function') {
+  String.prototype.startsWith = function (str){
+    return this.slice(0, str.length) == str;
+  };
+}

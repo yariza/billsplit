@@ -1,0 +1,23 @@
+<a ng-click="toggleOrder(orderID)"
+   stop-event="click"
+   class="list-group-item" id="order-item" href="javascript:void(0)">
+  <bs-input bs-model="orderData.price"
+            bs-editing="isSelected()"
+            bs-to-text="priceText"
+            bs-type="dollar"
+            class="pull-right"
+            id="order-price">
+  </bs-input>
+  <bs-input bs-model="orderData.name"
+            bs-editing="isSelected()"
+            bs-type="text"
+            id="order-name">
+  </bs-input>
+  <bs-input bs-model="orderData.members"
+            bs-editing="isSelected()"
+            bs-source="data.members"
+            bs-to-text="memberText"
+            bs-type="checkbox"
+            id="order-members">
+  </bs-input>
+</a>

@@ -1,0 +1,7 @@
+<span ng-repeat="(key, value) in bsSource"
+      stop-event="click">
+  <input type="checkbox"
+         ng-model="bsModel[key]">
+  </input>
+  [[ bsToText(key) ]]
+</span>

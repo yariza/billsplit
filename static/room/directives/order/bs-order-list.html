@@ -1,0 +1,10 @@
+<div ng-click="hideOrders()"
+     stop-event="click"
+     class="list-group" id="order-list">
+  <bs-order ng-repeat="(orderID, orderData) in orders"></bs-order>
+  <a ng-click="addOrder()"
+     stop-event="click"
+     id="add-order-item" class="list-group-item" href="javascript:void(0)">
+    <i class="fa fa-plus-circle fa-fw"></i><span>Add an order...</span>
+  </a>
+</div>

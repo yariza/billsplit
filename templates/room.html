@@ -1,109 +1,22 @@
 {% extends "base-noheader.html" %}
 {% block title %}RoomName{% endblock %}
 {% block head_attr %}ng-app="billsplit"{% endblock %}
-{% block body_attr %}ng-controller="RoomController as roomCtrl"{% endblock %}
+{% block body_attr %}bs-room{% endblock %}
 {% block head %}
-    {{ super() }}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/room.css') }}">
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/room.css') }}">
 
 {% endblock %}
 {% block content %}
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <a ng-click="roomCtrl.toggleUserMenu()" class="navbar-brand" href="#">
-        <span ng-hide="roomCtrl.showUserMenu" id="room-name-label">[[ roomCtrl.data.name ]]</span>
-        <input ng-model="roomCtrl.data.name"
-               ng-value="roomCtrl.data.name"
-               ng-show="roomCtrl.showUserMenu"
-               select-me="roomCtrl.showUserMenu"
-               stop-event="click"
-               ng-click-select
-               type="text" name="room-name" id="room-name-input" placeholder="Room Name" >
-        </input>
-        <i ng-hide="roomCtrl.showUserMenu" class="fa fa-caret-down fa-fw"></i>
-        <i ng-show="roomCtrl.showUserMenu" class="fa fa-caret-up fa-fw"></i>
-    </a>
-    <div ng-show="roomCtrl.showUserMenu" class="list-group" id="member-list">
-        <div ng-repeat="member in roomCtrl.data.members" class="list-group-item">
-            <div ng-style="{ 'background-color': member.color }" class="user-color"></div>
-            <span>[[ member.name ]]</span>
-        </div>
-        <a class="list-group-item" href="#"><i class="fa fa-plus-circle fa-fw"></i><span>Invite a member...</span></a>
-    </div>
-</nav>
+<bs-menu></bs-menu>
 
 
 
-  <bs-tabs>
-    <bs-pane bs-title="Orders">
+<bs-tabs>
+  <bs-pane bs-title="Orders">
 
-      <div ng-controller="OrderListController as orderListCtrl"
-           ng-click="orderListCtrl.hideOrders()"
-           stop-event="click"
-           class="list-group" id="order-list">
-        <a ng-controller="OrderController as orderCtrl"
-           ng-repeat="order in roomCtrl.data.orders"
-           ng-click="orderListCtrl.toggleOrder(order)"
-           stop-event="click"
-           ng-init="orderCtrl.data = order"
-           class="list-group-item" id="order-item" href="#">
-            <span ng-hide="orderCtrl.editing()"
-                  ng-click="orderCtrl.selectPrice = true"
-                  class="pull-right"
-                  id="order-price-label">
-                [[ order.price / 100 | currency ]]
-            </span>
-            <div class="input-group pull-right" style="width:25px"
-                 ng-show="orderCtrl.editing()">
-                <span class="input-group-addon">$</span>
-                <input ng-controller="OrderPriceController as orderPriceCtrl"
-                       ng-init="orderPriceCtrl.input = order.price / 100"
-                       ng-model="orderPriceCtrl.input"
-                       ng-change="orderPriceCtrl.updatePrice(orderCtrl)"
-                       select-me="orderCtrl.editing() && orderCtrl.selectPrice"
-                       stop-event="click"
-                       type="number"
-                       min="0" step="0.01"
-                       name="order-price" id="order-price-input" placeholder="0.00">
-                </input>
-            </div>
-            <span ng-hide="orderCtrl.editing()"
-                  ng-click="orderCtrl.selectPrice = false"
-                  id="order-name-label">
-                [[ order.name ]]
-            </span>
-            <input ng-show="orderCtrl.editing()"
-                   select-me="orderCtrl.editing() && !orderCtrl.selectPrice"
-                   ng-value="order.name"
-                   ng-model="order.name"
-                   ng-click-select
-                   stop-event="click"
-                   type="text" name="order-name" id="order-name-input" placeholder="Order Name" >
-            </input>
-            <div ng-hide="orderCtrl.editing()"
-                 id="order-members-label">
-                [[ roomCtrl.getMemberNames(order.members).join(', ') ]]
-            </div>
-            <div ng-show="orderCtrl.editing()"
-                 id="order-members-input">
-                <span ng-repeat="(memberID, member) in roomCtrl.data.members"
-                      ng-controller="OrderMemberController as orderMemberCtrl"
-                      ng-init="orderMemberCtrl.memberID = memberID"
-                      stop-event="click">
-                    <input type="checkbox"
-                           ng-checked="order.members.indexOf(memberID) !== -1"
-                           ng-model="orderMemberCtrl.selected"
-                           ng-change="orderMemberCtrl.updateMembers(orderCtrl)">
-                    </input>
-                    [[ member.name ]]
-                </span>
-            </div>
-        </a>
-        <a ng-click="orderListCtrl.addOrder()"
-           id="add-order-item" class="list-group-item" href="#">
-          <i class="fa fa-plus-circle fa-fw"></i><span>Add an order...</span>
-        </a>
-      </div>
+    <bs-order-list></bs-order-list>
 
     </bs-pane>
     <bs-pane bs-title="Wallet">
@@ -114,14 +27,6 @@
     </bs-pane>
   </bs-tabs>
 
-<!--     <nav class="navbar navbar-default navbar-fixed-bottom">
-      <ul class="nav nav-pills nav-justified">
-        <li role="presentation" class="active"><a href="#">Orders</a></li>
-        <li role="presentation"><a href="#">Wallet</a></li>
-        <li role="presentation"><a href="#">I'm Ready!</a></li>
-      </ul>
-    </nav>
-!-->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
 <script type="text/javascript" src="https://code.angularjs.org/1.2.28/angular-animate.js"></script>
 <script src="{{ url_for('static', filename='js/fastclick.js') }}" ></script>
@@ -133,6 +38,10 @@
 <script src="{{ url_for('static', filename='room/directives/wallet/bs-wallet.js') }}"></script>
 <script src="{{ url_for('static', filename='room/directives/panel/bs-panel.js') }}"></script>
 <script src="{{ url_for('static', filename='room/directives/multi-transclude.js') }}"></script>
+<script src="{{ url_for('static', filename='room/directives/room/bs-room.js') }}"></script>
+<script src="{{ url_for('static', filename='room/directives/menu/bs-menu.js') }}"></script>
+<script src="{{ url_for('static', filename='room/directives/input/bs-input.js') }}"></script>
+<script src="{{ url_for('static', filename='room/directives/order/bs-order.js') }}"></script>
 
 {% endblock %}
 

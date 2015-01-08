@@ -79,19 +79,24 @@
     padding: 10px 10px;
 }
 
-#order-list #order-price-input {
-    width: 60px;
+#order-price * {
+    width: 80px;
 }
 
-#order-name-label {
+#order-name .bs-input-span {
     font-size: 18px;
 }
 
-#order-price-label {
+#order-name * {
+    width: 170px;
+}
+
+#order-price .bs-input-span {
     font-size: 18px;
 }
 
-#order-members-label {
+#order-members .bs-input-span {
+    display: block;
     font-size: 14px;
 }
 

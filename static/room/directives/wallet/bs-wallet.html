@@ -1,0 +1,29 @@
+<bs-panel enabled="cashEnabled" header-only="cashHeader">
+  <span name="title">
+    <h4 class="small pull-right">Click to [[ cashEnabled ? 'disable' : 'enable' ]]</h4>
+    <h4><i class="fa fa-usd fa-fw"></i>&nbsp; Cash – [[ cashEnabled ? 'enabled' : 'disabled' ]]</h4>
+  </span>
+  <span name="body">
+    <form class="form-horizontal">
+      <div class="form-group" ng-repeat="(bill, num) in cash">
+        <div class="col-xs-4 vcenter">
+          <span class="control-label pull-right">$[[ bill/100 ]]&nbsp;&times;</span>
+        </div>
+        <div class="col-xs-6 vcenter">
+          <div class="input-group">
+            <input type="number" ng-model="cash[bill]" min="0" max="99" step="1" class="form-control"></input>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" ng-click="decrementCash(bill)">&minus;</button>
+              <button class="btn btn-default" type="button" ng-click="incrementCash(bill)">&plus;</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </span>
+</bs-panel>
+<bs-panel enabled="cardEnabled" header-only="cardHeader">
+  <span name="title">
+    <h4 class="small pull-right">Click to [[ cardEnabled ? 'disable' : 'enable' ]]</h4>
+    <h4><i class="fa fa-credit-card fa-fw"></i>&nbsp; Credit Card – [[ cardEnabled ? 'enabled' : 'disabled' ]]</h4>
+</bs-panel>

@@ -12,6 +12,10 @@
     margin-right: 5px;
 }
 
+.navbar {
+    overflow: hidden;
+}
+
 .navbar-brand {
     position: relative;
     text-align: center;
@@ -24,6 +28,19 @@
 .navbar .list-group {
     position: relative;
     display: inline;
+    -webkit-transition: max-height 0.5s;
+    -moz-transition: max-height 0.5s;
+    -o-transition: max-height 0.5s;
+    transition: max-height 0.5s;
+    max-height: 500px;
+}
+
+.navbar .list-group.ng-hide {
+    max-height: 0px;
+}
+
+.navbar .list-group.ng-show {
+    max-height: 500px;
 }
 
 .navbar .list-group-item {
@@ -80,4 +97,23 @@
 
 .site .footer {
     border-top: 0px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }

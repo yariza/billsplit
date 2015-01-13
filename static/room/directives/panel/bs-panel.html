@@ -1,0 +1,6 @@
+<div class="panel" ng-class="enabled ? 'panel-info' : 'panel-danger'" ng-multi-transclude-controller>
+  <div class="panel-heading clickable noselect" ng-click="headingClicked()" ng-multi-transclude="title">
+  </div>
+  <div class="panel-body" ng-show="enabled && !headerOnly" ng-multi-transclude="body">
+  </div>
+</div>

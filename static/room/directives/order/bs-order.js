@@ -27,7 +27,7 @@ angular.module('directives.order', [])
                 var newOrder = {
                     name: "New Order",
                     price: 0,
-                    members: []
+                    members: {}
                 };
                 $scope.data.orders['new_order'] = newOrder;
                 $scope.toggleOrder('new_order');
@@ -36,7 +36,7 @@ angular.module('directives.order', [])
         restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
         templateUrl: '/static/room/directives/order/bs-order-list.html',
         link: function($scope, iElm, iAttrs, controller) {
-
+            iElm.children().height($(window).height());
         }
     };
 }])
